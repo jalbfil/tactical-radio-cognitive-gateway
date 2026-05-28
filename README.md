@@ -231,3 +231,11 @@ This project demonstrates:
 The practical idea is:
 
 > In critical communications, it is not enough to know that a link is failing. It is more useful to infer why it is failing and adapt the routing policy accordingly.
+
+## Dashboard preview
+
+| Scenario | Screenshot | Gateway decision |
+|---|---|---|
+| `NOMINAL` | [`dashboard-nominal.png`](assets/dashboard-nominal.png) | Keep UHF primary path |
+| `DEGRADED_CLIMATE` | [`dashboard-degraded-climate.png`](assets/dashboard-degraded-climate.png) | Keep UHF with compression |
+| `JAMMED_ATTACK` | [`dashboard-jammed-attack.png`](assets/dashboard-jammed-attack.png) | Route critical traffic through SATCOM fallback |
