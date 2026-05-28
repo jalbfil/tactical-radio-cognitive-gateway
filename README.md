@@ -2,6 +2,10 @@
 
 Lightweight, synthetic and defensive lab for radio-link health classification and dynamic communications fallback.
 
+<p align="center">
+  <img src="assets/dashboard-jammed-attack.png" alt="Tactical Radio Cognitive Gateway dashboard showing synthetic jamming detection and SATCOM fallback" width="100%">
+</p>
+
 This repository continues the previous portfolio line:
 
 1. [`tactical-ospf-resilience-lab`](https://github.com/jalbfil/tactical-ospf-resilience-lab) — manual validation of an OSPF-resilient tactical IP topology.
