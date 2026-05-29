@@ -3,7 +3,7 @@
 Lightweight, synthetic and defensive lab for radio-link health classification and dynamic communications fallback.
 
 <p align="center">
-  <img src="assets/dashboard-jammed-attack.png" alt="Tactical Radio Cognitive Gateway dashboard showing synthetic jamming detection and SATCOM fallback" width="100%">
+  <img src="assets/dashboard-jammed-attack-v2.png" alt="Tactical Radio Cognitive Gateway dashboard showing synthetic jamming detection, metric history, report export and SATCOM fallback" width="100%">
 </p>
 
 This repository continues the previous portfolio line:
@@ -247,7 +247,7 @@ NOMINAL → DEGRADED_CLIMATE → JAMMED_ATTACK → SATCOM_FALLBACK
 |---|---|---|
 | `NOMINAL` | [`dashboard-nominal.png`](assets/dashboard-nominal.png) | Keep UHF primary path |
 | `DEGRADED_CLIMATE` | [`dashboard-degraded-climate.png`](assets/dashboard-degraded-climate.png) | Keep UHF with compression |
-| `JAMMED_ATTACK` | [`dashboard-jammed-attack.png`](assets/dashboard-jammed-attack.png) | Route critical traffic through SATCOM fallback |
+| `JAMMED_ATTACK` | [`dashboard-jammed-attack-v2.png`](assets/dashboard-jammed-attack-v2.png) | Route critical traffic through SATCOM fallback |
 
 ---
 
