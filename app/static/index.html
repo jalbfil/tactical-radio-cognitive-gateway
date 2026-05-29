@@ -1,1 +1,120 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Tactical Radio Cognitive Gateway</title><link rel="stylesheet" href="/static/styles.css"/></head><body><main class="shell"><header class="topbar"><div><p class="eyebrow">Synthetic defensive radio-link lab</p><h1>Tactical Radio Cognitive Gateway</h1><p class="subtitle">Local ML classification · UHF/SATCOM gateway policy · C2-inspired visualization</p></div><div class="status-card" id="status-card"><span class="status-label">LINK STATE</span><strong id="state-value">LOADING</strong><small id="confidence-value">confidence: --</small></div></header><section class="controls"><button data-scenario="nominal">Nominal UHF</button><button data-scenario="degraded_climate">Climate / Distance degradation</button><button data-scenario="jammed_attack">Synthetic jamming pattern</button><button data-tick>Generate new tick</button></section><section class="grid"><article class="map-card"><div class="card-header"><div><h2>Airborne link topology</h2><p>BASE · UAV-01 · AIR-01</p></div><div class="mode-pill" id="route-mode">---</div></div><div class="topology"><svg viewBox="0 0 960 520" class="network-svg" aria-label="Network topology"><line id="link-BASE-UAV" x1="160" y1="270" x2="480" y2="140"/><line id="link-UAV-AIR" x1="480" y1="140" x2="800" y2="270"/><path id="link-BASE-AIR-SATCOM" d="M160,315 C330,470 640,470 800,315"/><g class="node" id="node-BASE" transform="translate(160 270)"><circle r="46"/><text y="6">BASE</text></g><g class="node" id="node-UAV-01" transform="translate(480 140)"><circle r="46"/><text y="6">UAV-01</text></g><g class="node" id="node-AIR-01" transform="translate(800 270)"><circle r="46"/><text y="6">AIR-01</text></g><text class="link-label" x="285" y="178">UHF</text><text class="link-label" x="650" y="178">UHF RELAY</text><text class="link-label satcom-label" x="440" y="455">SATCOM FALLBACK</text></svg></div></article><aside class="side-panel"><article class="card alarm-card" id="alarm-card"><span class="label">EW ALARM</span><strong id="ew-alarm">OFF</strong><p id="operator-message">Waiting for status...</p></article><article class="card"><h3>Radio metrics</h3><div id="metrics" class="metrics"></div></article><article class="card"><h3>Gateway decision</h3><div id="decision" class="decision"></div></article></aside></section><section class="console"><div><strong>Recommended action</strong><p id="recommended-action">---</p></div><div><strong>Scenario</strong><p id="scenario-name">---</p></div><div><strong>Last update</strong><p id="last-update">---</p></div></section></main><script src="/static/dashboard.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tactical Radio Cognitive Gateway</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Synthetic defensive radio-link lab</p>
+        <h1>Tactical Radio Cognitive Gateway</h1>
+        <p class="subtitle">Local ML classification · UHF/SATCOM gateway policy · C2-inspired visualization</p>
+      </div>
+      <div class="status-card" id="status-card">
+        <span class="status-label">LINK STATE</span>
+        <strong id="state-value">LOADING</strong>
+        <small id="confidence-value">confidence: --</small>
+      </div>
+    </header>
+
+    <section class="controls">
+      <button data-scenario="nominal">Nominal UHF</button>
+      <button data-scenario="degraded_climate">Climate / Distance degradation</button>
+      <button data-scenario="jammed_attack">Synthetic jamming pattern</button>
+      <button data-tick>Generate new tick</button>
+      <button data-playback>Run scenario playback</button>
+      <button data-report>Export current report</button>
+    </section>
+
+    <section class="grid">
+      <article class="map-card">
+        <div class="card-header">
+          <div>
+            <h2>Airborne link topology</h2>
+            <p>BASE · UAV-01 · AIR-01</p>
+          </div>
+          <div class="mode-pill" id="route-mode">---</div>
+        </div>
+
+        <div class="topology">
+          <svg viewBox="0 0 960 520" class="network-svg" aria-label="Network topology">
+            <line id="link-BASE-UAV" x1="160" y1="270" x2="480" y2="140" />
+            <line id="link-UAV-AIR" x1="480" y1="140" x2="800" y2="270" />
+            <path id="link-BASE-AIR-SATCOM" d="M160,315 C330,470 640,470 800,315" />
+
+            <g class="node" id="node-BASE" transform="translate(160 270)">
+              <circle r="46" />
+              <text y="6">BASE</text>
+            </g>
+
+            <g class="node" id="node-UAV-01" transform="translate(480 140)">
+              <circle r="46" />
+              <text y="6">UAV-01</text>
+            </g>
+
+            <g class="node" id="node-AIR-01" transform="translate(800 270)">
+              <circle r="46" />
+              <text y="6">AIR-01</text>
+            </g>
+
+            <text class="link-label" x="285" y="178">UHF</text>
+            <text class="link-label" x="650" y="178">UHF RELAY</text>
+            <text class="link-label satcom-label" x="440" y="455">SATCOM FALLBACK</text>
+          </svg>
+        </div>
+      </article>
+
+      <aside class="side-panel">
+        <article class="card alarm-card" id="alarm-card">
+          <span class="label">EW ALARM</span>
+          <strong id="ew-alarm">OFF</strong>
+          <p id="operator-message">Waiting for status...</p>
+        </article>
+
+        <article class="card">
+          <h3>Radio metrics</h3>
+          <div id="metrics" class="metrics"></div>
+        </article>
+
+        <article class="card">
+          <h3>Gateway decision</h3>
+          <div id="decision" class="decision"></div>
+        </article>
+      </aside>
+    </section>
+
+    <section class="console">
+      <div>
+        <strong>Recommended action</strong>
+        <p id="recommended-action">---</p>
+      </div>
+      <div>
+        <strong>Scenario</strong>
+        <p id="scenario-name">---</p>
+      </div>
+      <div>
+        <strong>Last update</strong>
+        <p id="last-update">---</p>
+      </div>
+    </section>
+
+    <section class="bottom-grid">
+      <article class="card">
+        <h3>Metric history</h3>
+        <div id="history" class="history-list"></div>
+      </article>
+
+      <article class="card">
+        <h3>Exported report preview</h3>
+        <pre id="report-preview" class="report-preview">No report exported yet.</pre>
+      </article>
+    </section>
+  </main>
+
+  <script src="/static/dashboard.js"></script>
+</body>
+</html>
