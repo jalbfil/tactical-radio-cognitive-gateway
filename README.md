@@ -63,6 +63,9 @@ The MVP includes:
 - HTML/CSS/JavaScript dashboard.
 - Scenario selector: `Nominal`, `Climate / distance degradation`, `Jammed / attack pattern`.
 - API endpoints for metrics, classification and policy.
+- Report export endpoint.
+- Metric history endpoint.
+- Scenario playback sequence.
 - Tests with `pytest`.
 - Documentation and LinkedIn-ready brief.
 
@@ -124,6 +127,8 @@ Gateway policy engine
 FastAPI API
         ↓
 C2-inspired dashboard
+        ↓
+Report export / history / playback
 ```
 
 ---
@@ -146,16 +151,16 @@ Linux/macOS:
 source .venv/bin/activate
 ```
 
-Install dependencies:
-
-```bash
-pip install -r requirements.txt
-```
-
-or:
+Recommended install:
 
 ```bash
 pip install -e .[dev]
+```
+
+On Windows PowerShell, use quotes if needed:
+
+```powershell
+pip install -e ".[dev]"
 ```
 
 ---
@@ -165,6 +170,14 @@ pip install -e .[dev]
 ```bash
 pytest -q
 ```
+
+Validated locally:
+
+```text
+9 passed, 1 warning
+```
+
+See: [`docs/local-mvp-validation.md`](docs/local-mvp-validation.md)
 
 ---
 
@@ -184,17 +197,61 @@ http://127.0.0.1:8000
 
 ## 9. API examples
 
+Current status:
+
 ```bash
 curl http://127.0.0.1:8000/api/status
+```
+
+Scenario control:
+
+```bash
 curl -X POST http://127.0.0.1:8000/api/scenario/nominal
 curl -X POST http://127.0.0.1:8000/api/scenario/degraded_climate
 curl -X POST http://127.0.0.1:8000/api/scenario/jammed_attack
 curl -X POST http://127.0.0.1:8000/api/tick
 ```
 
+Report, history and playback:
+
+```bash
+curl http://127.0.0.1:8000/api/export-report
+curl http://127.0.0.1:8000/api/history
+curl -X POST http://127.0.0.1:8000/api/playback
+```
+
 ---
 
-## 10. Repository structure
+## 10. Dashboard capabilities
+
+The dashboard can now:
+
+- switch between operational scenarios;
+- generate new synthetic metric ticks;
+- show EW alarm state;
+- display UHF/SATCOM gateway decision;
+- render RSSI, SNR, packet loss, RTT, jitter and channel occupancy;
+- keep a short metric history;
+- export the current gateway report as JSON;
+- run an operational playback sequence:
+
+```text
+NOMINAL → DEGRADED_CLIMATE → JAMMED_ATTACK → SATCOM_FALLBACK
+```
+
+---
+
+## 11. Dashboard preview
+
+| Scenario | Screenshot | Gateway decision |
+|---|---|---|
+| `NOMINAL` | [`dashboard-nominal.png`](assets/dashboard-nominal.png) | Keep UHF primary path |
+| `DEGRADED_CLIMATE` | [`dashboard-degraded-climate.png`](assets/dashboard-degraded-climate.png) | Keep UHF with compression |
+| `JAMMED_ATTACK` | [`dashboard-jammed-attack.png`](assets/dashboard-jammed-attack.png) | Route critical traffic through SATCOM fallback |
+
+---
+
+## 12. Repository structure
 
 ```text
 tactical-radio-cognitive-gateway/
@@ -216,7 +273,7 @@ tactical-radio-cognitive-gateway/
 
 ---
 
-## 11. Professional value
+## 13. Professional value
 
 This project demonstrates:
 
@@ -226,16 +283,9 @@ This project demonstrates:
 - Lightweight gateway decision logic.
 - FastAPI backend development.
 - C2/CIS-inspired visualization.
+- Report generation and operational traceability.
 - End-to-end thinking: signal metrics → ML diagnosis → routing policy → operator view.
 
 The practical idea is:
 
 > In critical communications, it is not enough to know that a link is failing. It is more useful to infer why it is failing and adapt the routing policy accordingly.
-
-## Dashboard preview
-
-| Scenario | Screenshot | Gateway decision |
-|---|---|---|
-| `NOMINAL` | [`dashboard-nominal.png`](assets/dashboard-nominal.png) | Keep UHF primary path |
-| `DEGRADED_CLIMATE` | [`dashboard-degraded-climate.png`](assets/dashboard-degraded-climate.png) | Keep UHF with compression |
-| `JAMMED_ATTACK` | [`dashboard-jammed-attack.png`](assets/dashboard-jammed-attack.png) | Route critical traffic through SATCOM fallback |
